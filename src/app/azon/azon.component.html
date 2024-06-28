@@ -1,0 +1,33 @@
+
+
+<h5 *ngIf="isError" class="text-danger">Error: {{message}}</h5>
+
+<div *ngIf="!isError">
+    <h3>All Posts <span class="badge bg-primary">{{posts.length}}</span></h3>
+
+
+<div 
+    class="table-responsive"
+>
+    <table
+        class="table table-primary"
+    >
+        <thead>
+            <tr>
+                <th scope="col">User id azon</th>
+                <th scope="col">Post id</th>
+                <th scope="col">Title</th>
+                <th scope="col">Body</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let post of posts">
+                <td scope="row">{{post.userId}}</td>
+                <td>{{post.id}}</td>
+                <td>{{post.title}}</td>
+                <td>{{post.body}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>

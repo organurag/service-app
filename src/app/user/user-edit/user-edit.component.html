@@ -1,0 +1,47 @@
+<h2>Send User data</h2>
+<h2>{{message}}</h2>
+<form #userForm="ngForm" (ngSubmit)="sendUser()">
+    <div >
+        <div >
+            <input
+                type="hidden"
+                name="Id"
+                id="Id"
+                class="form-control"
+                placeholder="Enter Id"
+                ngModel
+                [readOnly]="isEdit"
+                
+                
+            />
+            <p class=""></p>
+            <label for="name">Name</label>
+            <input
+                type="text"
+                name="name"
+                id="name"
+                class="form-control"
+                placeholder="Enter Name"
+                ngModel
+                required
+                
+                
+            />
+            <label for="email">Email</label>
+            <input
+                type="email"
+                name="email"
+                id="email"
+                class="form-control"
+                placeholder="Enter Email"
+                ngModel
+                required
+                email
+                
+            />
+        </div> 
+        <button *ngIf="!isEdit" class="btn btn-primary my-2" type="submit">Create</button>
+        <button type="button" (click)="UpdateUser()" *ngIf="isEdit" class="btn btn-primary my-2">Update</button>
+        
+    </div>
+</form>
