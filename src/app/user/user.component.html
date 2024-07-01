@@ -1,4 +1,4 @@
-
+<div class="container">
 <button class="btn btn-primary" (click)="onCreate()">Create new</button>
 <div
     class="table-responsive"
@@ -8,10 +8,11 @@
     >
         <thead>
             <tr>
-                <th scope="col">userId</th>
+                <th scope="col">Sr. no</th>
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
-                <th scope="col">Aboout</th>
+                <th scope="col">City</th>
+                <th scope="col">About</th>
             </tr>
         </thead>
         <tbody *ngFor="let user of users">
@@ -19,6 +20,8 @@
                 <td scope="row">{{user.Id}}</td>
                 <td>{{user.Name}}</td>
                 <td>{{user.email}}</td>
+                <td>{{user.cityName}}</td>
+
                 <td><button class="btn btn-warning mx-2" (click)="onEdit(user.Id)">Edit</button>
                 <button class="btn btn-danger mx-2" (click)="onDelete(user.Id, user.Name)">Delete</button></td>
             </tr>
@@ -26,3 +29,4 @@
     </table>
 </div>
 
+</div>

@@ -1,8 +1,9 @@
 import { Component, DoCheck, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { User } from '../user.model';
+import { User } from '../Models/user.model';
 import { UsersService } from '../services/users.service';
 import { Router } from '@angular/router';
+import { City } from '../Models/city.model';
 
 @Component({
   selector: 'app-user',
@@ -19,10 +20,13 @@ export class UserComponent implements OnInit {
 
   users: User[] | any= [];
 
+  cities: City[] | any = [];
+
   constructor(private UserService : UsersService, private router : Router){}
 
   ngOnInit(): void {
     this.getUsers();
+    this.getCities();
   }
 
  
@@ -33,20 +37,8 @@ export class UserComponent implements OnInit {
     this.router.navigate(['useredit'])
   }
 
-  sendUser(){
 
-   console.log(this.userForm);
-    this.user1.id = this.userForm.value.Id;
-    this.user1.name = this.userForm.value.name;
-    this.user1.email = this.userForm.value.email;
-    this.userForm.reset();
 
-    this.UserService.sendUser(this.user1).subscribe(data => {
-      this.message = data;
-      this.getUsers();
-    })
-    
-  }
 
   getUsers(){
     this.UserService.getAllUsers().subscribe(data => {
@@ -64,7 +56,30 @@ export class UserComponent implements OnInit {
     confirm('Do you want to delete user with name:'+ name );
     this.UserService.deleteUser(id).subscribe(data => {
       this.message = data;
-      this.getUsers();});
+      this.getUsers();
+      this.getCities();});
       
+      
+  }
+
+  getCities(){
+    this.UserService.getAllCities().subscribe(data=> {
+      this.cities = data;
+      this.mapCityNames();
+    });
+  }
+
+  mapCityNames(){
+    for(const user of this.users){
+      const city = this.cities.find(c => c.CityId === user.cityId);
+      if(city)
+        {
+          user.cityName = city.CityName
+        }
+        else 
+        {
+          user.cityName = 'unknown';
+        }
+    }
   }
 }

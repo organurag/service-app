@@ -1,3 +1,4 @@
+<div class="container">
 <h2>Send User data</h2>
 <h2>{{message}}</h2>
 <form #userForm="ngForm" (ngSubmit)="sendUser()">
@@ -39,9 +40,19 @@
                 email
                 
             />
+            <label for="state">Select State</label>
+            <select id="state" class="form-control" [(ngModel)]="SelectedOption" (ngModelChange)="getCities($event)" name="state">
+                <option   *ngFor="let state of states" [value]="state.StateId" >{{state.StateName}}</option>
+            </select>
+
+            <label for="cityId">Select City</label>
+            <select id="cityId" class="form-control" name="cityId" ngModel >
+                <option   *ngFor="let city of cities" [value]="city.CityId" >{{city.CityName}}</option>
+            </select>
         </div> 
         <button *ngIf="!isEdit" class="btn btn-primary my-2" type="submit">Create</button>
         <button type="button" (click)="UpdateUser()" *ngIf="isEdit" class="btn btn-primary my-2">Update</button>
         
     </div>
 </form>
+</div>
